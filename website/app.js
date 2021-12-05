@@ -1,11 +1,13 @@
 /* Global Variables */
 /* https://api.openweathermap.org/data/2.5/weather?q={ZIP CODE}&appid={API KEY}*/
+const apiKey = "8d6ecf08c8a4775015d0e215a48baf29&units="
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather"
-const apiKey = "8d6ecf08c8a4775015d0e215a48baf29"
+const degreeUnit = 'metric'; // metric Or imperial 
 let genBtn = document.getElementById('generate');
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+// added '1' to the viewed month to get current the month 
+let newDate = (d.getMonth()+1) + '.' + d.getDate() + '.' + d.getFullYear();
 genBtn.addEventListener('click', generateBtn);
 
 
@@ -26,7 +28,7 @@ function generateBtn (e) {
 
 const getData = async (apiUrl, apiKey) => {
     let zipCode = document.getElementById('zip').value;
-    const resp = await fetch(`${apiUrl}?q=${zipCode}&appid=${apiKey}`);
+    const resp = await fetch(`${apiUrl}?q=${zipCode}&appid=${apiKey}${degreeUnit}`);
 
     try {
         const allData = await resp.json();
